@@ -24,7 +24,8 @@ def train_with_config(config_file_path: str, model_json_path: str):
     db_manager: DBManager = DBManager()
 
     # Load data
-    X, y = load_data(config.feature_sets, normalize=True)
+    X, y = load_data(config.feature_sets, normalize=True,
+                     accents=config.accents)
 
     # Setup cross-validation
     kf = KFold(n_splits=config.n_folds, shuffle=True,
@@ -74,7 +75,7 @@ def train_with_config(config_file_path: str, model_json_path: str):
             callbacks=[reduce_lr, early_stopping],
             verbose=config.verbose,
         )
-        scores.append(history.history['val_AUC'][-1])
+        scores.append(history.history['val_auc'][-1])
         print(f'AUC: {scores[-1]}')
         print()
 
@@ -94,6 +95,7 @@ def train_with_config(config_file_path: str, model_json_path: str):
         y,
         epochs=config.max_epochs,
         batch_size=config.batch_size,
+        validation_split=0.1,
         callbacks=[reduce_lr, early_stopping],
         verbose=config.verbose,
     )
@@ -104,6 +106,6 @@ def train_with_config(config_file_path: str, model_json_path: str):
     # Add results to database
     db_manager.add_result(
         config=config_dict,
-        val_aux=val_auc,
+        val_auc=val_auc,
         weights_path=weights_fname,
     )

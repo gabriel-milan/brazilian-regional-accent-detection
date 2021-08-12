@@ -1,7 +1,7 @@
 {
   "data_path": "data/",
   "random_seed": 8080,
-  "n_folds": 10,
+  "n_folds": 5,
   "max_epochs": 5000,
   "optimizer": "adam",
   "loss_func": "categorical_crossentropy",
@@ -12,6 +12,11 @@
   "lr_patience": 5,
   "es_patience": 25,
   "batch_size": 1024,
-  "feature_sets": [],
-  "accents": []
+  "feature_sets": [
+    "mfcc"
+  ],
+  "accents": [
+    "sertanejo",
+    "nordestino"
+  ]
 }
