@@ -1,0 +1,17 @@
+{
+  "data_path": "data/",
+  "random_seed": 8080,
+  "n_folds": 10,
+  "max_epochs": 5000,
+  "optimizer": "adam",
+  "loss_func": "categorical_crossentropy",
+  "monitor": "val_loss",
+  "monitor_mode": "auto",
+  "verbose": 1,
+  "lr_factor": 0.5,
+  "lr_patience": 5,
+  "es_patience": 25,
+  "batch_size": 1024,
+  "feature_sets": [],
+  "accents": []
+}
